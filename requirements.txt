@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+reportlab
+python-multipart
+pydantic
+passlib[bcrypt]
+PyJWT
+sqlalchemy
+databases
+stripe
+aiofiles
+requests
+email-validator

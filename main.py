@@ -13,44 +13,22 @@ from reportlab.pdfgen import canvas
 
 app = FastAPI()
 
-# --------- CORS PATCH pour Vercel + Local Dev ---------
+# -------- CORS PATCH POUR FRONTEND VERCEL ET LOCAL -------
 origins = [
-    "https://conform-scan.vercel.app",  # Ton frontend sur Vercel
-    "http://localhost:3000",
+    "https://conform-scan.vercel.app",  # Frontend production Vercel
+    "http://localhost:3000",            # Développement local
     "http://localhost:5173",
     "http://127.0.0.1:5173"
 ]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=origins,         # LISTE D’ORIGINES : PAS ["*"]
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-# ------------------------------------------------------
-
-from fastapi import FastAPI, Form, Header, HTTPException, Body
-from fastapi.responses import HTMLResponse, FileResponse
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from typing import Optional
-import os
-import uuid
-import json
-import random
-
-from reportlab.lib.pagesizes import A4
-from reportlab.pdfgen import canvas
-
-app = FastAPI()
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# --------------------------------------------------------
 
 @app.get("/", response_class=HTMLResponse)
 async def index():
